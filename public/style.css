@@ -1,0 +1,27 @@
+body {
+    width: 100%;
+    height: 100%;
+}
+
+.font-primary {
+    font-family: 'Permanent Marker', cursive;
+}
+.font-secondary {
+    font-family: 'Indie Flower', cursive;
+}
+
+.font-size-1 {
+    font-size: 25px;
+}
+
+.tab {
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+.tab:hover {
+    padding-left: 30px;
+    background: #28a745;
+    border: #28a745;
+}
