@@ -3,5 +3,12 @@ module.exports = function(sequelize, DataTypes) {
         name: DataTypes.STRING,
         password: DataTypes.STRING
     });
+
+    Family.associate = function(models) {
+        Family.hasMany(models.Member, {
+            onDelete: "cascade"
+        });
+    };
+
     return Family;
 };
