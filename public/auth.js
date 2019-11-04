@@ -30,10 +30,14 @@ $(document).ready(function () {
 
         $("#loginSubmit").on("click", function () {
 
-            $.get("/api/families/" + $("#loginName").val(), function (data) {
+            $.get("/api/families/" + $("#loginName").val(), function (err, data) {
+                if (err) throw err;
                 if (data.password === $("#loginPassword").val()) {
                     login();
                     $("#loginModal").modal("hide");
+                }
+                else {
+                    $("#loginError").text("Incorrect password...");
                 }
             });
         })
@@ -56,7 +60,7 @@ $(document).ready(function () {
         $("#loginBtn").hide();
         $("#welcomeMessage").show();
         $("#welcomeMessage").html("Welcome, " + sessionStorage.getItem("family name"));
-    }
+    };
 
     // End of jQuery
 });
