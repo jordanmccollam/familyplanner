@@ -8,4 +8,15 @@ module.exports = function(app) {
         });
     });
 
+    app.get("/api/families/:name", function(req, res) {
+
+        db.Family.findOne({
+            where: {
+                name: req.params.name
+            }
+        }).then(function(data) {
+            res.json(data);
+        })
+    })
+
 }

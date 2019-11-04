@@ -1,4 +1,4 @@
-var loggedIn;
+var currentFamily;
 
 $(document).ready(function () {
     $("#welcomeMessage").hide();
@@ -29,29 +29,34 @@ $(document).ready(function () {
         $("#loginModal").modal("show");
 
         $("#loginSubmit").on("click", function () {
-            
-            // $.get("/api/families/" + family, function(data) {
 
-            // })
-
-            login();
-            $("#loginModal").modal("hide");
+            $.get("/api/families/" + $("#loginName").val(), function (data) {
+                if (data.password === $("#loginPassword").val()) {
+                    login();
+                    $("#loginModal").modal("hide");
+                }
+            });
         })
     });
 
 
     function login() {
-        $("#loginBtn").hide();
-        $("#welcomeMessage").show();
-        loggedIn = {
+        currentFamily = {
             name: $("#newFamilyName").val() || $("#loginName").val(),
             password: $("#newPassword").val() || $("#loginPassword").val()
         };
-        sessionStorage.setItem("family name", loggedIn.name);
-        $("#welcomeMessage").html("Welcome, " + sessionStorage.getItem("family name"));
-
+        sessionStorage.setItem("family name", currentFamily.name);
+        sessionStorage.setItem("logged in", true);
+        location.reload();
     };
 
+
+    // If already logged in *******************************************************************************
+    if (sessionStorage.getItem("logged in") === "true") {
+        $("#loginBtn").hide();
+        $("#welcomeMessage").show();
+        $("#welcomeMessage").html("Welcome, " + sessionStorage.getItem("family name"));
+    }
 
     // End of jQuery
 });
