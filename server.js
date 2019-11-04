@@ -22,6 +22,7 @@ app.engine("handlebars", handlebars({
 app.set("view engine", "handlebars");
 
 require("./routes/family-api-routes")(app);
+require("./routes/member-api-routes")(app);
 require("./routes/html-routes")(app);
 
 // Listener
