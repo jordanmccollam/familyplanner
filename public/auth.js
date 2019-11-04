@@ -1,4 +1,7 @@
 var currentFamily;
+if (sessionStorage.getItem("logged in") !== "true") {
+    sessionStorage.setItem("logged in", false);
+};
 
 $(document).ready(function () {
     $("#welcomeMessage").hide();
