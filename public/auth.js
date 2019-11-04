@@ -30,14 +30,16 @@ $(document).ready(function () {
 
         $("#loginSubmit").on("click", function () {
 
-            $.get("/api/families/" + $("#loginName").val(), function (err, data) {
-                if (err) throw err;
-                if (data.password === $("#loginPassword").val()) {
-                    login();
-                    $("#loginModal").modal("hide");
-                }
-                else {
-                    $("#loginError").text("Incorrect password...");
+            $.get("/api/families/" + $("#loginName").val(), function (data) {
+                if (data) {
+                    if (data.password === $("#loginPassword").val()) {
+                        login();
+                        $("#loginModal").modal("hide");
+                    } else {
+                        $("#loginError").text("Incorrect password...");
+                    }
+                } else {
+                    $("#loginError").text("Incorrect family name...");
                 }
             });
         })
