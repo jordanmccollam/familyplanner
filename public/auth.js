@@ -5,6 +5,7 @@ if (sessionStorage.getItem("logged in") !== "true") {
 
 $(document).ready(function () {
     $("#welcomeMessage").hide();
+    $("#managePage").hide();
 
     // START FAMILY ****************************************************************
     $("#startFamily").on("click", function () {
@@ -65,6 +66,9 @@ $(document).ready(function () {
         $("#loginBtn").hide();
         $("#welcomeMessage").show();
         $("#welcomeMessage").html("Welcome, " + sessionStorage.getItem("family name"));
+
+        $("#welcomePage").hide();
+        $("#managePage").show();
     };
 
     // End of jQuery
