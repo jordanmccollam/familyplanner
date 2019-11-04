@@ -1,3 +1,5 @@
+var loggedIn;
+
 $(document).ready(function () {
     $("#welcomeMessage").hide();
 
@@ -16,16 +18,9 @@ $(document).ready(function () {
         };
 
         $.post("/api/families", newFamily);
-        newLogin(newFamily.name);
-
+        login();
         $("#newFamilyModal").modal("hide");
     });
-
-    function newLogin(name) {
-        $("#loginBtn").hide();
-        $("#welcomeMessage").show();
-        $("#welcomeMessage").html("Welcome, " + name);
-    };
 
 
     // LOGIN ****************************************************************************
@@ -34,16 +29,28 @@ $(document).ready(function () {
         $("#loginModal").modal("show");
 
         $("#loginSubmit").on("click", function () {
+            
+            // $.get("/api/families/" + family, function(data) {
+
+            // })
+
             login();
+            $("#loginModal").modal("hide");
         })
     });
 
+
     function login() {
-        var family = {
-            name: $("#loginName").val(),
-            password: $("#loginPassword").val()
+        $("#loginBtn").hide();
+        $("#welcomeMessage").show();
+        loggedIn = {
+            name: $("#newFamilyName").val() || $("#loginName").val(),
+            password: $("#newPassword").val() || $("#loginPassword").val()
         };
-    }
+        sessionStorage.setItem("family name", loggedIn.name);
+        $("#welcomeMessage").html("Welcome, " + sessionStorage.getItem("family name"));
+
+    };
 
 
     // End of jQuery
